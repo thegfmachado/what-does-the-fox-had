@@ -2,14 +2,14 @@
 
 import * as React from 'react';
 
-import Lottie from "lottie-react";
+// import Lottie from "lottie-react";
 import { Search } from 'lucide-react';
 
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 
-import foxAnimation from "@/public/animations/fox.json";
+// import foxAnimation from "@/public/animations/fox.json";
 
 type LeafletReducerState = {
   activeSubstance: string;
@@ -63,7 +63,7 @@ export default function Home() {
     <div className="items-center justify-items-center min-h-fit font-[family-name:var(--font-geist-sans)]">
       <main className="w-full flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <header className="w-full flex justify-between items-center">
-          <Lottie className="h-[150px]" animationData={foxAnimation} loop={false} />
+          {/* <Lottie className="h-[150px]" animationData={foxAnimation} loop={false} /> */}
           <h1 className="text-[2rem] font-bold">What does the fox had? 💊</h1>
         </header>
         <section className="w-full">
