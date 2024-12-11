@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import Link from "next/link";
 
 import "./globals.css";
 
@@ -16,6 +15,19 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
+const firaCode = localFont({
+  src: "./fonts/FiraCode.ttf",
+  variable: "--font-fira",
+  weight: "100 900",
+});
+
+const handjet = localFont({
+  src: "./fonts/Handjet.ttf",
+  variable: "--font-handjet",
+  weight: "100 900",
+});
+
+
 export const metadata: Metadata = {
   title: "What does the fox had?",
   description: "Bulário eletrônico para você sempre saber qual remédio tomou xD",
@@ -29,23 +41,9 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[peru] p-8 pb-1 flex flex-col gap-8 min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} ${firaCode.variable} ${handjet.variable} antialiased p-8 pb-1 flex flex-col gap-8 min-h-screen`}
       >
-        {children}
-
-        <footer className="grow flex justify-center items-end">
-          <div className="flex flex-col justify-center items-center gap-2">
-            <div>
-              Made with <span>❤️</span> and <span>☕</span>
-            </div>
-            <Link
-              href=""
-              target="_blank"
-            >
-              {`<gfm />`} © 2024
-            </Link>
-          </div>
-        </footer>
+       {children}
       </body>
     </html>
   );
