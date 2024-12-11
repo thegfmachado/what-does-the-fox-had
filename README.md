@@ -4,13 +4,7 @@
 
 ## 📝 Descrição
 
-**"What does the fox had?"** é uma aplicação que funciona como um bulário eletrônico. O objetivo é oferecer uma solução simples e eficaz para registrar e consultar os remédios que você já utilizou, facilitando a organização e o acompanhamento da sua saúde.
-
----
-
-## 🚀 Funcionalidades
-
-- **Busca facilitada**: Encontre rapidamente informações sobre os remédios registrados pela ANVISA.
+**"What does the fox had?"** é uma aplicação que funciona como um bulário eletrônico. O objetivo é oferecer uma solução simples e eficaz para consultar os detalhes dos remédios pelo nome que consta na embalagem.
 
 ---
 
@@ -21,10 +15,17 @@ Usando essa ferramenta, essa dúvida não precisa mais existir! Este projeto foi
 
 ---
 
+## 🚀 Funcionalidades
+
+- **Busca facilitada**: Encontre rapidamente informações sobre os remédios registrados pela ANVISA e outras fontes.
+
+---
+
 ## 🛠️ Tecnologias Utilizadas
 
 - [Next.js](https://nextjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
+- [React](https://react.dev/)
 - [Tailwind](https://tailwindcss.com)
 - [Shadcn/ui](https://ui.shadcn.com/docs)
 
