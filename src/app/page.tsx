@@ -10,12 +10,13 @@ import { Button } from '@/components/ui/button';
 import { ThemeModeToggle } from '@/components/theme/theme-mode-switcher';
 import { Separator } from '@/components/ui/separator';
 
-import foxImage from "@/public/images/fox.png";
 import { ThemeProvider } from 'next-themes';
 import Link from 'next/link';
 import { LeafletSkeleton } from '@/components/leaflet-skeleton';
 import { Leaflet } from '@/components/leaflet';
 import { LeafletType } from './interfaces/leaflet';
+
+import foxImage from "@/../public/images/fox.png";
 
 async function getLeaflet(word: string) {
   const response = await fetch("/api/leaflet", {
@@ -76,7 +77,7 @@ export default function Home() {
       enableSystem
       disableTransitionOnChange
     >
-      <div className="flex flex-col items-center justify-items-center min-h-fit gap-8 font-[family-name:var(--font-geist-sans)]">
+      <div className="flex flex-col items-center justify-items-center min-h-fit gap-8 font-inter">
         <header className="w-full">
           <div className="w-full flex justify-end">
             <ThemeModeToggle />
@@ -134,7 +135,7 @@ export default function Home() {
           </div>
           <div className="flex h-6 items-center space-x-4">
             <Link
-              className="flex justify-center items-center gap-2 text-lg font-[family-name:var(--font-handjet)] hover:font-bold hover:text-violet-600 active:text-violet-700"
+              className="flex justify-center items-center gap-2 text-lg font-handjet hover:font-bold hover:text-violet-600 active:text-violet-700"
               href="https://github.com/thegfmachado"
               target="_blank"
             >{`<gfm />`}
