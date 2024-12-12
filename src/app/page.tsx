@@ -19,7 +19,7 @@ import { NotFound } from '@/components/not-found';
 
 import foxImage from "@/../public/images/fox.png";
 
-async function getLeaflet(word: string) {
+async function getLeaflets(word: string): Promise<LeafletType[]> {
   const response = await fetch("/api/leaflet", {
     method: "POST",
     body: JSON.stringify({
@@ -30,35 +30,20 @@ async function getLeaflet(word: string) {
   return await response.json();
 }
 
-const reducerInitialState = {
-  activeSubstance: '',
-  therapeuticClass: '',
-  title: '',
-  whatFor: '',
-  howItWorks: '',
-}
-
-function leafletReducer(data: LeafletType, partialData: Partial<LeafletType>): LeafletType {
-  return {
-    ...data,
-    ...partialData,
-  };
-}
-
 const year = new Date().getFullYear();
 
 export default function Home() {
   const [loading, setLoading] = React.useState<boolean>(false);
   const [searched, setSearched] = React.useState<boolean>(false);
   const [searchWord, setSearchWord] = React.useState<string>('');
-  const [leafletReducerState, setLeafletReducerState] = React.useReducer(leafletReducer, reducerInitialState);
+  const [leaflets, setLeaflets] = React.useState<LeafletType[]>([]);
 
   const handleSearch = async (event: React.FormEvent) => {
     event.preventDefault();
     setLoading(true);
 
-    const leaflet = await getLeaflet(searchWord);
-    setLeafletReducerState(leaflet);
+    const leaflets = await getLeaflets(searchWord);
+    setLeaflets(leaflets);
 
     setLoading(false);
 
@@ -109,13 +94,17 @@ export default function Home() {
           </section>
           <section className="w-full flex justify-center">
             <div className="flex justify-center">
-              {leafletReducerState.title && !loading && (
-                <Leaflet {...leafletReducerState} source="Consulta Remédios" />
-              )}
+              {leaflets.length && !loading ? (
+                <div className="flex gap-2">
+                  {leaflets.map((leaflet, index) => (
+                    <Leaflet key={index} {...leaflet} />
+                  ))}
+                </div>
+              ) : null}
 
-              {searched && !leafletReducerState.title && !loading && (
+              {searched && !leaflets.length && !loading ? (
                 <NotFound />
-              )}
+              ) : null}
 
               {loading && (
                 <LeafletSkeleton />

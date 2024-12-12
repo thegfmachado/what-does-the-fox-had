@@ -4,6 +4,7 @@ interface LeafletType {
   title: string;
   whatFor: string;
   howItWorks: string;
+  source: string;
 }
 
 export type { LeafletType };

@@ -7,10 +7,17 @@ const getDictionaries = (searchWord: string) => ({
     therapeuticClassPath: '#cr_app > main > div:nth-child(3) > div.px-3 > p:nth-child(2)',
     whatForPath: '#para-que-serve > div.dinamic-html',
     howItWorksPath: '#como-funciona > div.dinamic-html',
+    source: "Consulta Remédios",
   },
   DOR_MAIS_SAUDE: {
     url: "https://www.dormaissaude.com.br",
-    leafletPath: `bulario/${searchWord}`
+    leafletPath: `bulario/${searchWord}`,
+    titlePath: 'body > div.render-container.render-route-store-custom-bulario-product > div > div.vtex-store__template.bg-base > div > div:nth-child(6) > div > div:nth-child(5) > div > section > div > div > div > div > div > div.rededor-bulario-0-x-productPageRightCol.w-100.w-75-l.flex.flex-column.items-start.justify-start > div:nth-child(1) > h1',
+    activeSubstancePath: 'body > div.render-container.render-route-store-custom-bulario-product > div > div.vtex-store__template.bg-base > div > div:nth-child(6) > div > div:nth-child(5) > div > section > div > div > div > div > div > div.rededor-bulario-0-x-productPageRightCol.w-100.w-75-l.flex.flex-column.items-start.justify-start > div:nth-child(1) > p:nth-child(2) > span',
+    therapeuticClassPath: 'body > div.render-container.render-route-store-custom-bulario-product > div > div.vtex-store__template.bg-base > div > div:nth-child(6) > div > div:nth-child(5) > div > section > div > div > div > div > div > div.rededor-bulario-0-x-productPageRightCol.w-100.w-75-l.flex.flex-column.items-start.justify-start > div:nth-child(1) > p:nth-child(3) > span',
+    whatForPath: 'body > div.render-container.render-route-store-custom-bulario-product > div > div.vtex-store__template.bg-base > div > div:nth-child(6) > div > div:nth-child(5) > div > section > div > div > div > div > div > div.rededor-bulario-0-x-productPageRightCol.w-100.w-75-l.flex.flex-column.items-start.justify-start > div:nth-child(2) > div',
+    howItWorksPath: 'body > div.render-container.render-route-store-custom-bulario-product > div > div.vtex-store__template.bg-base > div > div:nth-child(6) > div > div:nth-child(5) > div > section > div > div > div > div > div > div.rededor-bulario-0-x-productPageRightCol.w-100.w-75-l.flex.flex-column.items-start.justify-start > div:nth-child(8) > div',
+    source: "D'or Mais Saúde",
   },
 });
 
@@ -34,6 +41,6 @@ function getHeaders(originURL: string) {
 }
 
 export {
-  getDictionaries, 
+  getDictionaries,
   getHeaders,
 };

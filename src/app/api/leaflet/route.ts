@@ -1,30 +1,46 @@
-import { LeafletType } from '@/app/interfaces/leaflet';
-import { getDictionaries } from '@/utils/request';
-import { sanitizeAndFormatWord } from '@/utils/string';
-import * as cheerio from 'cheerio';
-
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-// import { getHeaders } from '@/utils/request';
-// const headers = getHeaders("https://consultaremedios.com.br/");
+import * as cheerio from 'cheerio';
 
-export async function POST(req: NextRequest): Promise<NextResponse<LeafletType>> {
+import { LeafletType } from '@/app/interfaces/leaflet';
+import { getDictionaries } from '@/utils/request';
+import { sanitizeAndFormatWord } from '@/utils/string';
+
+export async function POST(req: NextRequest): Promise<NextResponse<LeafletType[]>> {
   const word = ((await req.json())?.word as string).toLowerCase();
 
   const sanitizedWord = sanitizeAndFormatWord(word);
-  const { CONSULTA_REMEDIOS } = getDictionaries(sanitizedWord);
+  const { CONSULTA_REMEDIOS, DOR_MAIS_SAUDE } = getDictionaries(sanitizedWord);
 
-  const request = await fetch(`${CONSULTA_REMEDIOS.url}/${CONSULTA_REMEDIOS.leafletPath}`);
+  const [resp1, resp2] = await Promise.all([
+    fetch(`${CONSULTA_REMEDIOS.url}/${CONSULTA_REMEDIOS.leafletPath}`)
+      .then((response) => response.text())
+      .then((html) => cheerio.load(html)),
 
-  const response = await request.text();
-  const leafletResponse = cheerio.load(response);
+    fetch(`${DOR_MAIS_SAUDE.url}/${DOR_MAIS_SAUDE.leafletPath}`)
+      .then((response) => response.text())
+      .then((html) => cheerio.load(html)),
+  ]);
 
-  const title = leafletResponse(CONSULTA_REMEDIOS.titlePath).text();
-  const activeSubstance = leafletResponse(CONSULTA_REMEDIOS.activeSubstancePath).text();
-  const therapeuticClass = leafletResponse(CONSULTA_REMEDIOS.therapeuticClassPath).text();
-  const whatFor = leafletResponse(CONSULTA_REMEDIOS.whatForPath).text();
-  const howItWorks = leafletResponse(CONSULTA_REMEDIOS.howItWorksPath).text();
+  const leaflets: LeafletType[] = [
+    {
+      title: resp1(CONSULTA_REMEDIOS.titlePath).text(),
+      activeSubstance: resp1(CONSULTA_REMEDIOS.activeSubstancePath).text(),
+      therapeuticClass: resp1(CONSULTA_REMEDIOS.therapeuticClassPath).text(),
+      whatFor: resp1(CONSULTA_REMEDIOS.whatForPath).text(),
+      howItWorks: resp1(CONSULTA_REMEDIOS.howItWorksPath).text(),
+      source: CONSULTA_REMEDIOS.source,
+    },
+    {
+      title: resp2(DOR_MAIS_SAUDE.titlePath).text(),
+      activeSubstance: resp2(DOR_MAIS_SAUDE.activeSubstancePath).text(),
+      therapeuticClass: resp2(DOR_MAIS_SAUDE.therapeuticClassPath).text(),
+      whatFor: resp2(DOR_MAIS_SAUDE.whatForPath).text(),
+      howItWorks: resp2(DOR_MAIS_SAUDE.howItWorksPath).text(),
+      source: DOR_MAIS_SAUDE.source,
+    }
+  ];
 
-  return NextResponse.json({ activeSubstance, therapeuticClass, title, whatFor, howItWorks });
+  return NextResponse.json(leaflets);
 }
