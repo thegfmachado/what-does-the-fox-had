@@ -15,6 +15,7 @@ import Link from 'next/link';
 import { LeafletSkeleton } from '@/components/leaflet-skeleton';
 import { Leaflet } from '@/components/leaflet';
 import { LeafletType } from './interfaces/leaflet';
+import { NotFound } from '@/components/not-found';
 
 import foxImage from "@/../public/images/fox.png";
 
@@ -87,38 +88,33 @@ export default function Home() {
           <section className="w-full">
             <div className="flex flex-col justify-center items-center">
               <Image className="h-[128px] w-[128px]" src={foxImage} alt="fox logo" />
-              <h1 className="font-extrabold tracking-tight lg:text-4xl mt-6">
+              <h1 className="font-extrabold tracking-tight mt-6 text-2xl sm:text-3xl md:text-4xl">
                 What does the <span className="text-[#f97316]">fox</span> had? 💊
               </h1>
-              <p className="leading-7 mt-6 lg:text-xl">
-                Quantas vezes você já achou um remédio aleatório perdido no fundo da gaveta e pensou: <span className="text-[#f97316] font-extrabold">&quot;Pra que raios serve isso?&quot;</span>
-              </p>
-              <p className="leading-7 lg:text-xl">
-                Descubra os detalhes do remédio pesquisando pelo nome que consta na embalagem.
-              </p>
+              <div className="flex flex-col items-center justify-center text-center mt-6 gap-2 sm:leading-6 sm:text-lg md:leading-7 md:text-xl">
+                <p>
+                  Quantas vezes você já achou um remédio aleatório perdido no fundo da gaveta e pensou: <span className="text-[#f97316] font-extrabold">&quot;Pra que raios serve isso?&quot;</span>
+                </p>
+                <p>
+                  Descubra os detalhes do remédio pesquisando pelo nome que consta na embalagem.
+                </p>
+              </div>
             </div>
           </section>
           <section className="w-full flex justify-center">
-            <form className="flex gap-2 w-1/3" onSubmit={handleSearch}>
-              <Input type="text" placeholder="Informe o medicamento desejado..." onChange={handleInputChange} value={searchWord} />
+            <form className="flex gap-2 w-full md:w-2/3 max-w-2xl" onSubmit={handleSearch}>
+              <Input className="text-sm md:text-base" type="text" placeholder="Informe o medicamento desejado..." onChange={handleInputChange} value={searchWord} />
               <Button variant="outline" type="submit" size="icon" disabled={loading || !searchWord.length}><Search /></Button>
             </form>
           </section>
           <section className="w-full flex justify-center">
-            <div className="flex justify-center w-1/3">
+            <div className="flex justify-center">
               {leafletReducerState.title && !loading && (
                 <Leaflet {...leafletReducerState} source="Consulta Remédios" />
               )}
 
               {searched && !leafletReducerState.title && !loading && (
-                <div className="flex items-center pt-16 px-4">
-                  <div className="w-full space-y-6 text-center">
-                    <div className="space-y-3">
-                      <p className="text-4xl font-bold tracking-tighter">Oops! A raposa não achou nada</p>
-                      <p className="text-lg text-gray-500">Cuidado com esse seu remedinho desconhecido heinn 🤨👀.</p>
-                    </div>
-                  </div>
-                </div>
+                <NotFound />
               )}
 
               {loading && (
