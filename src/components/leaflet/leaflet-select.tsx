@@ -26,7 +26,7 @@ export function LeafletSelect(props: LeafletSelectProps) {
   const selectedLeaflet = leaflets.find((leaflet) => leaflet.siteName === selectedOption);
 
   React.useEffect(() => {
-    setSelectedOption(leaflets[0]?.siteName || '');
+    setSelectedOption(leaflets[0]?.siteName);
   }, [leaflets]);
 
   if (!leaflets.length) {
@@ -35,7 +35,7 @@ export function LeafletSelect(props: LeafletSelectProps) {
 
   return (
     <div className="w-full min-w-[346px] md:hidden gap-2">
-      <Select defaultValue={selectedOption} onValueChange={setSelectedOption}>
+      <Select defaultValue={leaflets[0]?.siteName} onValueChange={setSelectedOption}>
         <SelectTrigger className="min-w-[280px]">
           <SelectValue placeholder="Selecione uma fonte" />
         </SelectTrigger>
