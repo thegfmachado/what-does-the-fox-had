@@ -14,7 +14,7 @@ export function Leaflet(props: LeafletProps) {
   return (
     <>
       <div className="p-6 flex justify-center items-center border-b">
-        <h4 className="text-md font-medium leading-none">{title}</h4>
+        <h4 className="text-md font-extrabold leading-none">{title}</h4>
       </div>
 
       <div className="p-4 flex flex-col gap-2">

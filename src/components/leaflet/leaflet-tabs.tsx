@@ -12,6 +12,8 @@ type LeafletTabsProps = {
 export function LeafletTabs(props: LeafletTabsProps) {
   const { leaflets } = props
 
+  const gridColsClass = `grid grid-cols-${String(leaflets.length)}`;
+
   if (!leaflets.length) {
     return null;
   }
@@ -38,8 +40,8 @@ export function LeafletTabs(props: LeafletTabsProps) {
   }));
 
   return (
-    <Tabs className="hidden sm:block" defaultValue={leaflets[0].siteName}>
-      <TabsList className={`grid w-full grid-cols-${leaflets.length}`}>
+    <Tabs className="hidden md:block" defaultValue={leaflets[0].siteName}>
+      <TabsList className={`w-full ${gridColsClass}`}>
         {tabElements.map((element) => element.trigger)}
       </TabsList>
       <div className="flex w-full justify-center gap-2">

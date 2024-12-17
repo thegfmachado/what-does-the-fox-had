@@ -20,7 +20,7 @@ export function LeafletWrapper(props: LeafletWrapperProps) {
   return (
     <div className="flex flex-col items-center justify-center">
       {leaflets.length && !loading ? (
-        <ScrollArea className="h-90 w-full md:min-w-[650px] md:w-1/3 rounded-md border font-fira">
+        <ScrollArea className="h-90 w-full md:w-[50%] md:min-w-[650px] rounded-md border font-fira">
           <LeafletSelect leaflets={leaflets} />
           <LeafletTabs leaflets={leaflets} />
         </ScrollArea>
