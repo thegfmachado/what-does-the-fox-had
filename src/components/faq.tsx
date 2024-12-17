@@ -1,5 +1,7 @@
 "use client"
 
+import * as React from "react";
+
 import Link from "next/link";
 
 import {
@@ -19,12 +21,12 @@ export function FAQ() {
         <AccordionItem value="item-1">
           <AccordionTrigger className="text-sm">Posso confiar nessas informações?</AccordionTrigger>
           <AccordionContent>
-            <span className="mb-2 text-sm">
+            <div className="mb-2 text-sm">
               Sim, este site apenas mostra informações obtidas através de fontes oficiais como a ANVISA entre outras. Cheque todas as fontes abaixo:
-            </span>
-            <span>
+            </div>
+            <div>
               {Object.values(SOURCES).map((source, index, array) => (
-                <div key={source.url}>
+                <React.Fragment key={source.url}>
                   <Link
                     className="font-medium underline underline-offset-4"
                     href={source.url}
@@ -33,9 +35,9 @@ export function FAQ() {
                     {source.name}
                     {index < array.length - 1 && ", "}
                   </Link>
-                </div>
+                </React.Fragment>
               ))}
-            </span>
+            </div>
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-2">
