@@ -5,6 +5,9 @@ import * as React from 'react';
 import Link from 'next/link';
 import { ThemeProvider } from 'next-themes';
 
+//@ts-expect-error -- bulario is not typed
+import bulario from 'bulario';
+
 import { Search } from 'lucide-react';
 
 import { ANVISALeafletType } from './interfaces/anvisa';
@@ -31,6 +34,9 @@ async function getScrappingLeaflets(medicineName: string): Promise<LeafletType[]
 }
 
 async function getANVISALeaflet(medicineName: string): Promise<ANVISALeafletType> {
+  const busca = await bulario.pesquisar(medicineName)
+  console.log(`\n INFORMAÇÕES DA PESQUISA`, busca)
+
   const response = await fetch(`/api/leaflet/anvisa?medicine=${medicineName}`);
 
   return await response.json();
