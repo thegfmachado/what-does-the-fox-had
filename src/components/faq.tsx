@@ -33,8 +33,8 @@ export function FAQ() {
                     target="_blank"
                   >
                     {source.name}
-                    {index < array.length - 1 && ", "}
                   </Link>
+                  {index < array.length - 1 && ", "}
                 </React.Fragment>
               ))}
             </div>
@@ -45,6 +45,15 @@ export function FAQ() {
           <AccordionContent>
             <span className="mb-2 text-sm">
               A partir de técnicas de web scraping e APIs, buscamos informações em sites oficiais e confiáveis para trazer a você a melhor experiência possível.
+            </span>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-3">
+          <AccordionTrigger className="text-sm">Por que algumas consultas demoram as vezes?</AccordionTrigger>
+          <AccordionContent>
+            <span className="mb-2 text-sm">
+              No presente momento a ANVISA / Governo Brasileiro não disponibiliza alguns dados para serem utilizados por programadores e pesquisadores.
+              Sendo assim, utilizando técnicas de web scraping é realizada a busca desses dados. Por não ser uma API oficial, as consultas ficam instáveis.
             </span>
           </AccordionContent>
         </AccordionItem>
