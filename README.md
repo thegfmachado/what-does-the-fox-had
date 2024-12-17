@@ -10,8 +10,7 @@
 
 ## 💡 Motivação
 
-Quantas vezes você já achou um remédio aleatório perdido no fundo da gaveta e pensou: *"Pra que raios serve isso?"*  
-Usando essa ferramenta, essa dúvida não precisa mais existir! Este projeto foi criado para trazer praticidade ao gerenciamento do histórico de medicamentos de forma moderna e acessível.
+Quantas vezes você já achou um remédio aleatório perdido no fundo da gaveta e pensou: *"Pra que raios serve isso?"* Usando essa ferramenta, essa dúvida não precisa mais existir!
 
 ---
 
