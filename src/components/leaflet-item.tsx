@@ -2,19 +2,22 @@
 
 import * as React from "react"
 
-import { Separator } from "@radix-ui/react-separator"
+import { Separator } from "./ui/separator";
 
 type LeafletItemProps = {
-  title: string;
+  label?: string;
+  last?: boolean;
+  value: string;
 }
 
 export function LeafletItem(props: LeafletItemProps) {
-  const { title } = props;
+  const { last, label, value } = props;
 
   return (
     <div>
-      <Separator className="my-2" />
-      <span className="text-sm">{title}</span>
+      {label && <span className="text-sm font-bold">{label ? `${label}: ` : label}</span>}
+      <span className="text-sm">{value}</span>
+      {!last && <Separator className="my-2" />}
     </div>
   )
 }

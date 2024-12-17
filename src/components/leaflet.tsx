@@ -2,27 +2,68 @@
 
 import { LeafletType } from "@/app/interfaces/leaflet";
 import { LeafletItem } from "./leaflet-item";
-import { ScrollArea } from "./ui/scroll-area";
+import { TabsContent } from "./ui/tabs";
+import { Download } from "lucide-react";
+import { Button } from "./ui/button";
+import Link from "next/link";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 
 type LeafletProps = LeafletType & {
-  source: string;
+  pdfURL?: string;
 };
 
-export function Leaflet(props: LeafletProps) {
-  const { activeSubstance, therapeuticClass, title, whatFor, howItWorks, source } = props;
+type LeafletInfoProps = Omit<LeafletProps, 'siteName' | 'pdfURL'>;
+
+export function LeafletInfo(props: LeafletInfoProps) {
+  const { activeSubstance, therapeuticClass, title, whatFor, howItWorks } = props;
 
   return (
-    <ScrollArea className="h-80 md:w-2/3 max-w-2xl rounded-md border font-fira">
-      <div className="p-4">
-        <h4 className="mb-4 text-sm font-medium leading-none">Fonte: {source}</h4>
-        <div className="flex flex-col gap-1">
-          {title && <LeafletItem title={title} />}
-          {activeSubstance && <LeafletItem title={activeSubstance} />}
-          {therapeuticClass && <LeafletItem title={therapeuticClass} />}
-          {whatFor && <LeafletItem title={whatFor} />}
-          {howItWorks && <LeafletItem title={howItWorks} />}
-        </div>
+    <>
+      <div className="p-6 flex justify-center items-center border-b">
+        <h4 className="text-md font-medium leading-none">{title}</h4>
       </div>
-    </ScrollArea>
+
+      <div className="p-4 flex flex-col gap-2">
+        {activeSubstance && <LeafletItem label="Princípio Ativo" value={activeSubstance} />}
+        {therapeuticClass && <LeafletItem label="Classe Terapêutica" value={therapeuticClass} />}
+        {whatFor && <LeafletItem label="Indicado para" value={whatFor} />}
+        {howItWorks && <LeafletItem label="Como funciona" value={howItWorks} last />}
+      </div>
+    </>
+  )
+}
+
+export function Leaflet(props: LeafletProps) {
+  const { activeSubstance, therapeuticClass, title, whatFor, howItWorks, siteName, pdfURL } = props;
+
+  return (
+    <TabsContent value={siteName} className="w-full">
+      <LeafletInfo
+        activeSubstance={activeSubstance}
+        therapeuticClass={therapeuticClass}
+        title={title}
+        whatFor={whatFor}
+        howItWorks={howItWorks}
+      />
+      {siteName === 'ANVISA' && pdfURL ?
+        (<div className="flex justify-end items-center">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link
+                href={pdfURL}
+                target="_blank"
+              >
+                <Button className="m-4 hover:bg-fox active:bg-fox" variant="outline" size="icon">
+                  <Download />
+                </Button>
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Baixar bula da ANVISA</p>
+            </TooltipContent>
+          </Tooltip>
+        </div>)
+        : null}
+    </TabsContent>
   )
 }

@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body
-        className={`${inter.variable} ${firaCode.variable} ${handjet.variable} antialiased p-4 md:p-8 pb-1 flex flex-col gap-8 min-h-screen`}
+        className={`${inter.variable} ${firaCode.variable} ${handjet.variable}`}
       >
        {children}
       </body>

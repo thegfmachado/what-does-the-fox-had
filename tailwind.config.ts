@@ -13,6 +13,7 @@ const config: Config = {
 		extend: {
 			colors: {
 				background: 'hsl(var(--background))',
+				fox: "hsl(var(--fox))",
 				foreground: 'hsl(var(--foreground))',
 				card: {
 					DEFAULT: 'hsl(var(--card))',
